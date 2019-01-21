@@ -1,0 +1,144 @@
+#include<iostream>
+using namespace std;
+#include <string>
+
+class Person
+{
+public:
+	int sId;
+	string fName, lName;
+	string course;
+
+	Person(){}
+
+	void getPerson()
+	{
+		
+		cout << "enter Student Id";
+		cin >> sId;
+		cout << "enter First Name";
+		cin >> fName;
+		cout << "enter Last Name";
+		cin >> lName;
+		cout << "enter course";
+		cin >> course;
+		
+	}
+	void showDetails() {
+		cout << sId << "\t" << fName << "\t" << lName << "\t" << course << endl;
+	}
+};
+
+class UG : public Person
+{
+public:
+	void getUG()
+	{
+		cout << "UG student details";
+		
+	}
+};
+class  Sports
+{
+public:
+	void getSports()
+	{
+		
+		cout << " sports details" ;
+	}
+};
+
+class PG : public UG ,public Sports
+{
+public:
+	void getPG()
+	{
+		cout << "PG details";
+		
+	}
+};
+
+
+
+int main()
+{
+	PG p[5];
+	int num, k = 0;
+	int id;
+	string f1, f2, f3;
+	do {
+		cout << "choose " << endl << "1:enter details" << endl << "2:display details" << endl << "3:search details" << endl << "4:update details" << endl << "5: delete" << endl;
+		cin >> num;
+		switch (num)
+		{
+		case 1:cout << "enter details" << endl;
+
+			p[k].getPerson();
+			k++;
+			break;
+		case 2:cout << "display details" << endl;
+			for (int j = 0; j < k; j++) {
+				p[j].showDetails();
+			}
+			break;
+		case 3:cout << "search details" << endl;
+			cout << "enter id to search" << endl;
+			cin >> id;
+			for (int i = 0; i < k; k++) {
+				if (p[i].sId == id) {
+					p[i].showDetails();
+				}
+				else {
+					cout << "ID not found";
+				}
+				break;
+			}
+			break;
+		case 4:cout << "update details" << endl;
+			cout << "enter the ID for updating";
+			cin >> id;
+			for (int i = 0; i < k; i++) {
+				if (p[i].sId == id) {
+					p[i].showDetails();
+					cout << "enter fname";
+					cin >> f1;
+					cout << "enter last name";
+					cin >> f2;
+					cout << "enter group";
+					cin >> f3;
+					p[i].fName = f1;
+					p[i].lName = f2;
+					p[i].course = f3;
+
+					cout << "-------updated values-------" << endl;
+					p[i].showDetails();
+				}
+			}
+
+			break;
+		case 5:cout << "delete " << endl;
+			cin >> id;
+			for (int i = 0; i < k; i++)
+			{
+				if (p[i].sId == id)
+				{
+					for (int j = i; j < (k - 1); j++)
+					{
+						p[j] = p[j + 1];
+					}
+					//count++;
+					break;
+				}
+			}
+			k--;
+			cout << "ID deleted " << endl;
+			break;
+		default:
+			break;
+		}
+
+	} while (num < 6);
+
+	return 0;
+}
+
